@@ -73,6 +73,11 @@ public class RegistrationPage  extends  BasePage {
     @FindBy(className = "info-account")
     private WebElement successfulRegisteredText;
 
+    @FindBy(xpath = "//div[@id='center_column']//div[1]/p")
+    private WebElement theNumberOfErrorsText;
+    @FindBy(xpath = "//div[@id='center_column']//div[1]/ol/li[1]")
+    private WebElement theFirstErrorText;
+
 
     public RegistrationPage(WebDriver driver) {
         super(driver);
@@ -373,6 +378,22 @@ public class RegistrationPage  extends  BasePage {
             logger.error("Enable to create account!");
             e.printStackTrace();
             Assert.fail("Enable to create account!");
+        }
+    }
+
+    /**
+     * Method checkIfRegistrationWasUnSuccessful
+     */
+
+    public void checkIfRegistrationWasUnSuccessful(){
+        try{
+            Assert.assertEquals("There is 1 error", theNumberOfErrorsText.getText());
+            Assert.assertEquals("This country requires you to choose a State.", theFirstErrorText.getText());
+            logger.info("Unsuccessful created account!");
+        }catch (Exception e){
+            logger.error("Enable to check the error field!");
+            e.printStackTrace();
+            Assert.fail("Enable to check the error field!");
         }
     }
 }

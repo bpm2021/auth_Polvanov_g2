@@ -16,4 +16,9 @@
             <class name="web.ContactUsTest"/>
         </classes>
     </test>
+    <test name="Unsuccessful Registration Test">
+        <classes>
+            <class name="web.UnseccessfulRegistration"/>
+        </classes>
+    </test>
 </suite>

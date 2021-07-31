@@ -21,6 +21,7 @@ public class BaseTest {
 
 
     protected String EMAIL = createPropertiesObject().getProperty("email");
+    protected String SECOND_EMAIl = createPropertiesObject().getProperty("second_email");
     protected String FIRST_NAME = createPropertiesObject().getProperty("FirstName");
     protected String LAST_NAME = createPropertiesObject().getProperty("lastName");
     protected String PASSWORD = createPropertiesObject().getProperty("passowrd");
