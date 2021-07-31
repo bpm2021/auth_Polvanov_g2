@@ -303,22 +303,6 @@ public class RegistrationPage  extends  BasePage {
     }
 
     /**
-     *Method selectCountryName
-     * @param COUNTRY_NAME
-     */
-
-    public void selectCountryName(String COUNTRY_NAME){
-        try {
-            Select cc = new Select(selectCountry);
-            cc.selectByIndex(Integer.parseInt(COUNTRY_NAME));
-            logger.info("Successful selected the the country name!");
-        }catch (Exception e){;
-            logger.error("Enable to selected the the country name!");
-            Assert.fail("Enable to selected the country name!");
-        }
-    }
-
-    /**
      * Method inputMobileNumberToField
      * @param MOBILE_NUMBER
      * */

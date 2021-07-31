@@ -35,7 +35,6 @@ public class RegistratinTest  extends  BaseTest{
         registrationPage.inputCatyNameToField(CITY_NAME);
         registrationPage.selectStateName(STATE_NAME);
         registrationPage.insertZipCode(ZIP_CODE);
-        //registrationPage.selectCountryName(COUNTRY_NAME);
         registrationPage.inputMobileNumberToField(MOBILE_NUMBER);
         registrationPage.inputAliasToTheField(ALIAS_NAME);
         registrationPage.clickOnTheRegisteredButton();
