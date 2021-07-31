@@ -107,7 +107,6 @@ public class RegistrationPage  extends  BasePage {
             logger.error("Enable to click on the button");
             Assert.fail("Enable to click on the button");
         }
-
     }
 
     /**

@@ -6,6 +6,11 @@
             <class name="web.RegistrationTest"/>
         </classes>
     </test>
+    <test name="Autorisation Test">
+        <classes>
+            <class name="web.AutorisationTest"/>
+        </classes>
+    </test>
     <test name="ContactUS Test">
         <classes>
             <class name="web.ContactUsTest"/>
