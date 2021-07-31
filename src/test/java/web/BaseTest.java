@@ -36,9 +36,9 @@ public class BaseTest {
     protected String COUNTRY_NAME = createPropertiesObject().getProperty("country");
     protected String MOBILE_NUMBER = createPropertiesObject().getProperty("MobNumber");
     protected String ALIAS_NAME = createPropertiesObject().getProperty("alias");
-
-
-
+    protected String HEADING_NAME = createPropertiesObject().getProperty("subHead");
+    protected String ORDER_NAME = createPropertiesObject().getProperty("orderRef");
+    protected String MESSAGE = createPropertiesObject().getProperty("messages");
 
     protected Properties createPropertiesObject(){
         try{

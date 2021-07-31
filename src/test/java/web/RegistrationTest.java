@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import pages.RegistrationPage;
 
 
-public class RegistratinTest  extends  BaseTest{
+public class RegistrationTest extends  BaseTest{
 
     RegistrationPage registrationPage;
 
