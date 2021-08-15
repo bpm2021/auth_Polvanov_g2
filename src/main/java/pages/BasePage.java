@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -7,8 +8,8 @@ import org.apache.log4j.Logger;
 
 public class BasePage {
 
-    private Logger    logger;
-    private WebDriver driver;
+    protected Logger    logger;
+    protected WebDriver driver;
 
     public BasePage(WebDriver driver){
         this.driver = driver;
@@ -16,7 +17,18 @@ public class BasePage {
         logger = Logger.getLogger(getClass());
     }
 
+    /**
+     * Method openWebPage
+     * @param URL
+     * */
+
     protected  void openURL(String URL){
-        driver.get(URL);
+        try {
+            driver.get(URL);
+            logger.info("Successful opened page!");
+        }catch (Exception e) {
+            logger.error("Unsuccessful opened page!");
+            Assert.fail("Unsuccessful opened page!");
+        }
     }
 }

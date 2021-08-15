@@ -1,6 +1,7 @@
 package pages;
 
-import org.apache.http.util.Asserts;
+
+import models.Account;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -8,31 +9,31 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import static libs.WebDriverMethods.*;
+import static libs.WebDriverMethods.selectValueFromScrollDownList;
+
 
 public class RegistrationPage  extends  BasePage {
 
     private static final Logger logger = Logger.getLogger(RegistrationPage.class);
 
-    @FindBy(className = "login")
-    private WebElement signInButton;
 
-    @FindBy(id = "email_create")
-    private WebElement insertEmail;
-
-    @FindBy(xpath = "//button[@id='SubmitCreate']//span")
-    private WebElement creatAnAccountButton;
+    @FindBy(xpath = "//label[normalize-space()='Mr.']//input[@name='id_gender']")
+    private WebElement maleRadioButton;
+    @FindBy(xpath = "//label[normalize-space()='Mrs.']//input[@name='id_gender']")
+    private WebElement femaleRadioButton;
 
     @FindBy(id = "customer_firstname")
-    private  WebElement insertFirstName;
+    private  WebElement firstName;
 
     @FindBy(id = "email")
-    private WebElement resetEmail;
+    private WebElement email;
 
     @FindBy(id = "customer_lastname")
-    private  WebElement insertLastName;
+    private  WebElement lastName;
 
     @FindBy(id = "passwd")
-    private WebElement insertPassword;
+    private WebElement passwordField;
 
     @FindBy(xpath = "//select[@id='days']")
     private WebElement selectBirthDay;
@@ -44,356 +45,96 @@ public class RegistrationPage  extends  BasePage {
     private WebElement selectBirthYear;
 
     @FindBy(id = "company")
-    private WebElement insertCompanyName;
+    private WebElement companyNamefield;
 
     @FindBy(xpath = "//p[4]/input")
-    private WebElement insertAddres;
+    private WebElement addresField;
 
     @FindBy(id = "city")
-    private  WebElement insertCity;
+    private  WebElement cityField;
 
     @FindBy(id = "id_state")
     private  WebElement selectState;
 
     @FindBy(id = "postcode")
-    private WebElement insertZIP;
+    private WebElement zipField;
 
     @FindBy(id = "id_country")
     private WebElement selectCountry;
 
     @FindBy(id = "phone_mobile")
-    private WebElement insertPhoneNumber;
+    private WebElement phoneNumberField;
 
     @FindBy(id = "alias")
-    private WebElement insertAlias;
+    private WebElement aliasField;
 
     @FindBy(xpath = "//span[text()='Register']")
     private WebElement registeredButton;
 
-    @FindBy(className = "info-account")
+    @FindBy(className = "page-heading")
     private WebElement successfulRegisteredText;
-
-    @FindBy(xpath = "//div[@id='center_column']//div[1]/p")
-    private WebElement theNumberOfErrorsText;
-    @FindBy(xpath = "//div[@id='center_column']//div[1]/ol/li[1]")
-    private WebElement theFirstErrorText;
 
 
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
 
-    /**
-     * Method openWebPage
-     * @param URL
-     * */
-
-    public void openWebPage(String URL){
-        try {
-            openURL(URL);
-            logger.info("Successful opened page!");
-        }catch (Exception e) {
-            logger.error("Unsuccessful opened page!");
-            Assert.fail("Unsuccessful opened page!");
-        }
-
+    public void selectGender(String gender){
+        if(gender.equals("Mr."))
+            clickOnTheRadioButton(maleRadioButton);
+        else
+            clickOnTheRadioButton(femaleRadioButton);
     }
 
-    /**
-     *
-     * Method cliclOnSignInButton
-     * */
+    public void inputFirstNameToField(String FIRST_NAME){ inputDateToTheField(firstName,FIRST_NAME);}
 
-    public void cliclOnSignInButton(){
-        try{
-            signInButton.click();
-            logger.info("Successful click on the button!");
-        }catch (Exception e){
-            logger.error("Enable to click on the button");
-            Assert.fail("Enable to click on the button");
-        }
+    public void inputLastNameToField(String LAST_NAME){inputDateToTheField(lastName,LAST_NAME);}
+
+    public void resetAndInputEmailToField(String emailAddress){ clearTheField(email); inputDateToTheField(email, emailAddress);}
+
+    public void inputPasswordToField(String password){inputDateToTheField(passwordField, password);}
+
+    public void selectBirthDate(int BIRTH_DD, int BIRTH_MM, int BIRTH_YY){
+        selectValueFromScrollDownList(selectBirthDay,BIRTH_DD);
+        selectValueFromScrollDownList(selectBirthMonth,BIRTH_MM);
+        selectValueFromScrollDownList(selectBirthYear,BIRTH_YY);
     }
 
-    /**
-     *Method inputEmailToField
-     *@param email
-     * */
+    public void inputCompanyNameToField(String COMPANY_NAME){ inputDateToTheField(companyNamefield,COMPANY_NAME);}
 
-    public void inputEmailToField(String email){
-        try{
-            insertEmail.sendKeys(email);
-            logger.info("Successful input the email to field!");
-        }catch (Exception e){
-            logger.error("Enable to input the email to field!");
-            Assert.fail("Enable to input the email to field!");
-        }
-    }
+    public void inputAddressToField(String ADDRESS_NAME){ inputDateToTheField(addresField,ADDRESS_NAME);}
 
-    /**
-     * Method creatAnAccountButton
-     * */
+    public void inputCityNameToField(String CITY_NAME){ inputDateToTheField(cityField,CITY_NAME);}
 
-    public void creatAnAccountButton(){
-        try{
-            creatAnAccountButton.click();
-            logger.info("Successful clicked on the button!");
-        }catch (Exception e){
-            logger.error("Enable clicked on the button!");
-            Assert.fail("Enable clicked on the button!");
-        }
-    }
+    public void selectStateName(int STATE_NAME){selectValueFromScrollDownList(selectState, STATE_NAME);}
 
-    /**
-     * Method inputFirstNameToField
-     * @param FIRST_NAME
-     */
+    public void inputZipCode(String ZIP_CODE){ inputDateToTheField(zipField,ZIP_CODE);}
 
-    public void inputFirstNameToField(String FIRST_NAME){
-        try{
-            insertFirstName.sendKeys(FIRST_NAME);
-            logger.info("Successful input the first name to field!");
-        }catch (Exception e){
-            logger.error("Enable to input the first name to field!");
-            Assert.fail("Enable to input the first name to field!");
-        }
-    }
+    public void selectCountryName(int COUNTRY_NAME){ selectValueFromScrollDownList(selectCountry, COUNTRY_NAME);}
 
-    /**
-     * inputLastNameToField
-     * @param LAST_NAME
-     * */
+    public void inputMobileNumberToField(String MOBILE_NUMBER){ inputDateToTheField(phoneNumberField, MOBILE_NUMBER);}
 
-    public void inputLastNameToField(String LAST_NAME){
-        try{
-            insertLastName.sendKeys(LAST_NAME);
-            logger.info("Successful input the last name to field!");
-        }catch (Exception e){
-            logger.error("Enable to input the last name to field!");
-            Assert.fail("Enable to input the last name to field!");
-        }
-    }
+    public void inputAliasToTheField(String ALIAS_NAME){ inputDateToTheField(aliasField,ALIAS_NAME);}
 
-    /**
-     *Method resetEmailToField
-     *@param email
-     * */
+    public void clickOnTheRegisteredButton(){ clickOnTheButton(registeredButton);}
 
-    public void resetEmailToField(String email){
-        try{
-            resetEmail.clear();
-            resetEmail.sendKeys(email);
-            logger.info("Successful reset the email to field!");
-        }catch (Exception e){
-            logger.error("Enable to reset the email to field!");
-            Assert.fail("Enable to reset the email to field!");
-        }
-    }
+    public void checkTextOnThePage(String text){ Assert.assertEquals(text, getTextOfElement(successfulRegisteredText));}
 
-
-    /**
-     * Method inputPasswordToField
-     * @param   PASSWORD
-     * */
-
-    public void inputPasswordToField(String PASSWORD){
-        try{
-            insertPassword.sendKeys(PASSWORD);
-            logger.info("Successful input the password to field!");
-        }catch (Exception e){
-            logger.error("Enable to input the password to field!");
-            Assert.fail("Enable to input the password to field!");
-        }
-    }
-
-    /**
-     * Method selectBirthDate
-     * @param BIRTH_DD,
-     * @param BIRTH_MM,
-     * @param BIRTH_YY
-     * */
-
-    public void selectBirthDate(String BIRTH_DD, String BIRTH_MM, String BIRTH_YY){
-        try {
-            Select dd = new Select(selectBirthDay);
-            dd.selectByIndex(Integer.parseInt(BIRTH_DD));
-
-            Select mm = new Select(selectBirthMonth);
-            mm.selectByIndex(Integer.parseInt(BIRTH_MM));
-
-            Select yy = new Select(selectBirthYear);
-            yy.selectByIndex(Integer.parseInt(BIRTH_YY));
-
-            logger.info("Successful selected the birth date!");
-        }catch (Exception e){;
-            logger.error("Enable to selected the birth date!");
-            Assert.fail("Enable to selected the birth date!");
-        }
-    }
-
-    /**
-     * Method inputCopanyNameToField
-     * @param COMPANY_NAME
-     * */
-
-    public void inputCopanyNameToField(String COMPANY_NAME){
-        try{
-            insertCompanyName.sendKeys(COMPANY_NAME);
-            logger.info("Successful input the company name to field!");
-        }catch (Exception e){
-            logger.error("Enable to input the company name to field!");
-            Assert.fail("Enable to input the company name to field!");
-        }
-    }
-
-    /**
-     * Method inputAddresToField
-     * @param ADDRRES_NAME
-     * */
-
-    public void inputAddresToField(String ADDRRES_NAME){
-        try{
-            insertAddres.sendKeys(ADDRRES_NAME);
-            logger.info("Successful input the addres anme name to field!");
-        }catch (Exception e){
-            logger.error("Enable to input the addres anme to field!");
-            Assert.fail("Enable to input the addres anme to field!");
-        }
-    }
-
-    /**
-     * Method inputCatyNameToField
-     * @param CITY_NAME
-     * */
-
-    public void inputCatyNameToField(String CITY_NAME){
-        try{
-            insertCity.sendKeys(CITY_NAME);
-            logger.info("Successful input the address name name to field!");
-        }catch (Exception e){
-            logger.error("Enable to input the address name to field!");
-            Assert.fail("Enable to input the address name to field!");
-        }
-    }
-
-    /**
-     * Method selectStateName
-     * @param STATE_NAME
-     * */
-
-    public void selectStateName(String STATE_NAME){
-        try {
-            Select ss = new Select(selectState);
-            ss.selectByIndex(Integer.parseInt(STATE_NAME));
-            logger.info("Successful selected the the state name!");
-        }catch (Exception e){;
-            logger.error("Enable to selected the the state name!");
-            Assert.fail("Enable to selected the state name!");
-        }
-    }
-
-    /**
-     * method insertZipCode
-     * @param ZIP_CODE
-     * */
-
-    public void insertZipCode(String ZIP_CODE){
-        try{
-            insertZIP.sendKeys(ZIP_CODE);
-            logger.info("Successful input the zip code  to field!");
-        }catch (Exception e){
-            logger.error("Enable to input the zip code to field!");
-            Assert.fail("Enable to input the zip code to field!");
-        }
-    }
-
-    /**
-     *Method selectCountryName
-     * @param COUNTRY_NAME
-     */
-
-    public void selectCountryName(String COUNTRY_NAME){
-        try {
-            Select cc = new Select(selectCountry);
-            cc.selectByIndex(Integer.parseInt(COUNTRY_NAME));
-            logger.info("Successful selected the the country name!");
-        }catch (Exception e){;
-            logger.error("Enable to selected the the country name!");
-            Assert.fail("Enable to selected the country name!");
-        }
-    }
-
-    /**
-     * Method inputMobileNumberToField
-     * @param MOBILE_NUMBER
-     * */
-
-    public void inputMobileNumberToField(String MOBILE_NUMBER){
-        try{
-            insertPhoneNumber.sendKeys(MOBILE_NUMBER);
-            logger.info("Successful input the phone number  to field!");
-        }catch (Exception e){
-            logger.error("Enable to input the phone number to field!");
-            Assert.fail("Enable to input the phone number to field!");
-        }
-    }
-
-    /**
-     * Method inputAliasToTheField
-     * @param ALIAS_NAME
-     */
-
-    public void inputAliasToTheField(String ALIAS_NAME){
-        try{
-            insertAlias.sendKeys(ALIAS_NAME);
-            logger.info("Successful input the alias number  to field!");
-        }catch (Exception e){
-            logger.error("Enable to input the phone number to field!");
-            Assert.fail("Enable to input the alias number to field!");
-        }
-    }
-
-    /**
-     * Method clickOnTheRegisteredButton
-     */
-
-    public void clickOnTheRegisteredButton(){
-        try{
-            registeredButton.click();
-            logger.info("Successful clicked!");
-        }catch (Exception e){
-            logger.error("Enable to click!");
-            Assert.fail("Enable to click!");
-        }
-    }
-
-    /**
-     * Method checkIfRegistrationWasSuccessful
-     */
-
-    public void checkIfRegistrationWasSuccessful(){
-        try{
-            Assert.assertEquals("Welcome to your account. Here you can manage all of your personal information and orders.", successfulRegisteredText.getText());
-            logger.info("Successful created account!");
-        }catch (Exception e){
-            logger.error("Enable to create account!");
-            e.printStackTrace();
-            Assert.fail("Enable to create account!");
-        }
-    }
-
-    /**
-     * Method checkIfRegistrationWasUnSuccessful
-     */
-
-    public void checkIfRegistrationWasUnSuccessful(){
-        try{
-            Assert.assertEquals("There is 1 error", theNumberOfErrorsText.getText());
-            Assert.assertEquals("This country requires you to choose a State.", theFirstErrorText.getText());
-            logger.info("Unsuccessful created account!");
-        }catch (Exception e){
-            logger.error("Enable to check the error field!");
-            e.printStackTrace();
-            Assert.fail("Enable to check the error field!");
-        }
+    public void createNewUser(Account userAccount){
+        selectGender(userAccount.getGender());
+        inputFirstNameToField(userAccount.getFirstName());
+        inputLastNameToField(userAccount.getLastName());
+        resetAndInputEmailToField(userAccount.getEmail());
+        inputPasswordToField(userAccount.getPassword());
+        selectBirthDate(userAccount.getBirthDay(), userAccount.getBirthMonth(), userAccount.getBirthYear());
+        inputCompanyNameToField(userAccount.getCompanyName());
+        inputAddressToField(userAccount.getAddressName());
+        inputCityNameToField(userAccount.getCityName());
+        selectStateName(userAccount.getStateName());
+        inputZipCode(userAccount.getZipCode());
+        selectCountryName(userAccount.getCountryName());
+        inputMobileNumberToField(userAccount.getPhoneNumber());
+        inputAliasToTheField(userAccount.getAlias());
+        clickOnTheRegisteredButton();
     }
 }
