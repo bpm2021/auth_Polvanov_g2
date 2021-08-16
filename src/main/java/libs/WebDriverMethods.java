@@ -1,5 +1,6 @@
 package libs;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +15,7 @@ public class WebDriverMethods {
      * Method clickOnTheButton
      * @param buttonElement
      * */
-
+    @Step("Click on the button")
     public static void clickOnTheButton(WebElement buttonElement){
         try{
             buttonElement.click();
@@ -31,7 +32,7 @@ public class WebDriverMethods {
      * @param fieldElement
      * @param textElement
      */
-
+    @Step("Input data to the field {textElement}")
     public static void inputDateToTheField(WebElement fieldElement, String textElement){
         try{
             fieldElement.sendKeys(textElement);
@@ -48,6 +49,7 @@ public class WebDriverMethods {
      * @return title
      */
 
+    @Step("get title of page")
     public static String getWebSiteTitle(WebDriver driver){
         String title = null;
         try{
@@ -67,6 +69,7 @@ public class WebDriverMethods {
      * @return text
      */
 
+    @Step("get testx of element")
     public static String getTextOfElement(WebElement pageElement){
         String text = null;
         try{
@@ -84,7 +87,7 @@ public class WebDriverMethods {
      * Method clickOnTheRadioButton
      * @param radioElement
      */
-
+    @Step("cick on the Radio Button")
     public static void clickOnTheRadioButton(WebElement radioElement){
         try{
             radioElement.click();
@@ -102,6 +105,7 @@ public class WebDriverMethods {
      * @param indexOfElement
      */
 
+    @Step("Select value from scroll down list")
     public static void selectValueFromScrollDownList(WebElement scrollDownListElement, int indexOfElement){
         try {
             Select scrollElement = new Select(scrollDownListElement);
@@ -119,6 +123,7 @@ public class WebDriverMethods {
      * @param fieldElement
      */
 
+    @Step("Clear the field")
     public static void clearTheField(WebElement fieldElement){
         try {
             fieldElement.clear();
@@ -136,6 +141,7 @@ public class WebDriverMethods {
      * @param textOfElement
      */
 
+    @Step("Select text from scroll down list")
     public static void selectTextFromScrollDownList(WebElement scrollDownListElement, String textOfElement){
         try {
             Select scrollElement = new Select(scrollDownListElement);

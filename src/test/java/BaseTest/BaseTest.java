@@ -15,7 +15,10 @@ import pages.SignInPage;
 import java.io.FileInputStream;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import libs.CustomListener;
 
+
+@Listeners(CustomListener.class)
 public class BaseTest {
 
     protected        Properties properties = new Properties();

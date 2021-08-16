@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import models.Currency;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,15 +26,19 @@ public class CurrencyExchangePage extends BasePage {
     @FindBy(xpath = "//p[@id='UAH']//input[@id='currency_exchange']")
     private WebElement resultInUAH;
 
-
+    @Step("open page")
     public void openWebPage(String URL){ openURL(URL);}
 
+    @Step("Select amount {amount}")
     public void inputAmountToTheField(String amount){ inputDateToTheField(amountField,amount);}
 
+    @Step("Select currency {currency}")
     public void selectCurrency(String currency){ selectTextFromScrollDownList(currencyScrollDownList, currency);}
 
+    @Step("Select Bank {bank}")
     public void selectCBank(String bank){ selectTextFromScrollDownList(bankScrollDownList, bank);}
 
+    @Step("Check if text not equals zero")
     public void checkConvertCurrency(){
         Assert.assertNotEquals("0.0", resultInUAH.getAttribute("value"));
     }
